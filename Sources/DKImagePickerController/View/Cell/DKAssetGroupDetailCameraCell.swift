@@ -21,7 +21,10 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
         let cameraImageView = UIImageView(frame: self.bounds)
         cameraImageView.contentMode = .center
         cameraImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        cameraImageView.image = DKImagePickerControllerResource.cameraImage()
+        let bundle = Bundle.imagePickerControllerBundle()
+        var image = UIImage(named: "camera", in: bundle, compatibleWith: nil) ?? UIImage()
+
+        cameraImageView.image = image
         self.contentView.addSubview(cameraImageView)
         
         self.contentView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
@@ -34,3 +37,11 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
     }
     
 } /* DKAssetGroupDetailCameraCell */
+private extension Bundle {
+    
+    class func imagePickerControllerBundle() -> Bundle {
+        let assetPath = Bundle(for: DKImagePickerControllerResource.self).resourcePath!
+        return Bundle(path: (assetPath as NSString).appendingPathComponent("DKImagePickerController.bundle"))!
+    }
+    
+}
