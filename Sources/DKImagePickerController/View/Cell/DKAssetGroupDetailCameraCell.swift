@@ -21,9 +21,7 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
         let cameraImageView = UIImageView(frame: self.bounds)
         cameraImageView.contentMode = .center
         cameraImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        let bundle = Bundle.imagePickerControllerBundle()
-        var image = UIImage(named: "camera", in: bundle, compatibleWith: nil) ?? UIImage()
-
+        cameraImageView.image = bundledImage(named: "camera")
         cameraImageView.image = image
         self.contentView.addSubview(cameraImageView)
         
@@ -37,11 +35,11 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
     }
     
 } /* DKAssetGroupDetailCameraCell */
-private extension Bundle {
-    
-    class func imagePickerControllerBundle() -> Bundle {
-        let assetPath = Bundle(for: DKImagePickerControllerResource.self).resourcePath!
-        return Bundle(path: (assetPath as NSString).appendingPathComponent("DKImagePickerController.bundle"))!
-    }
-    
+
+private func bundledImage(named: String) -> UIImage? {
+    let image = UIImage(named: named)
+    if image == nil {
+        return UIImage(named: named, in: Bundle(for: DKImagePickerController.classForCoder()), compatibleWith: nil)
+    } // Replace MyBasePodClass with yours
+    return image
 }
