@@ -38,7 +38,8 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
 private func bundledImage(named: String) -> UIImage? {
     let image = UIImage(named: named)
     if image == nil {
-        return UIImage(named: named, in: Bundle(for: DKImagePickerController.classForCoder()), compatibleWith: nil)
-    } // Replace MyBasePodClass with yours
+        let bundle: Bundle = Bundle(identifier: "org.cocoapods.DKImagePickerController")!
+        return  UIImage(named: named, in: bundle, compatibleWith: nil)
+    }
     return image
 }
