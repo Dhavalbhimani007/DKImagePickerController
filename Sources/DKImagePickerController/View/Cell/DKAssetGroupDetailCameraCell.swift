@@ -22,7 +22,6 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
         cameraImageView.contentMode = .center
         cameraImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cameraImageView.image = bundledImage(named: "camera")
-        cameraImageView.image = image
         self.contentView.addSubview(cameraImageView)
         
         self.contentView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
